@@ -8,11 +8,15 @@ const Errors = {
     AUR_07: 'Access only for super admins',
     AUR_08: 'All fields are required',
     AUR_09: 'Email already exists',
-    AUR_10: 'Email does not exists'
+    AUR_10: 'Email does not exists',
+    AUR_11: 'UserId is required',
+    AUR_12: 'User account is not activated',
+    AUR_13: 'Email is required'
 };
 
 handleAuthErrors = (code, status, field) => {
     return {
+      error: true,
       status,
       field,
       code: code,
