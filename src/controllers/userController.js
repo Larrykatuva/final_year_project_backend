@@ -43,7 +43,7 @@ class UserController{
                 const send = await sendActivationMail(email, `${host}/activate/${newUser.id}`)
                 if(send){
                     return res
-                        .status(200)
+                        .status(201)
                         .send({
                             error: false,
                             message: "User added successfully",
