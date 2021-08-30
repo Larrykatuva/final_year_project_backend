@@ -1,4 +1,4 @@
-const models = require('../../src/sequelize/index')
+const models = require('../src/sequelize/models/index')
 
 const truncate = async () => {
     await models.sequelize.sync ();
