@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="7.3960" tests="8" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-08-30T07:25:27" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Authentication tests" timestamp="2021-08-30T07:25:27" tests="0" file="C:\Users\larry\OneDrive\Desktop\Final Year\project-backend\test\authentication\index.js" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Post /auth/register" timestamp="2021-08-30T07:25:35" tests="2" file="C:\Users\larry\OneDrive\Desktop\Final Year\project-backend\test\authentication\index.js" time="2.4200" failures="0">
+    <testcase name="Authentication tests Post /auth/register Should create new user account" time="2.3710" classname="Should create new user account">
+    </testcase>
+    <testcase name="Authentication tests Post /auth/register Should not create user account more than once" time="0.0490" classname="Should not create user account more than once">
+    </testcase>
+  </testsuite>
+  <testsuite name="Post /auth/login" timestamp="2021-08-30T07:25:37" tests="4" file="C:\Users\larry\OneDrive\Desktop\Final Year\project-backend\test\authentication\index.js" time="2.7200" failures="0">
+    <testcase name="Authentication tests Post /auth/login Should not  login user with unverified email" time="2.4890" classname="Should not  login user with unverified email">
+    </testcase>
+    <testcase name="Authentication tests Post /auth/login Should verify user email" time="0.0320" classname="Should verify user email">
+    </testcase>
+    <testcase name="Authentication tests Post /auth/login Should not login user with invalid email" time="0.0200" classname="Should not login user with invalid email">
+    </testcase>
+    <testcase name="Authentication tests Post /auth/login Should not login user with invalid details" time="0.1790" classname="Should not login user with invalid details">
+    </testcase>
+  </testsuite>
+  <testsuite name="Post /auth/activate/{userId}" timestamp="2021-08-30T07:25:40" tests="2" file="C:\Users\larry\OneDrive\Desktop\Final Year\project-backend\test\authentication\index.js" time="2.2560" failures="0">
+    <testcase name="Authentication tests Post /auth/activate/{userId} Should send an activation link email" time="2.2410" classname="Should send an activation link email">
+    </testcase>
+    <testcase name="Authentication tests Post /auth/activate/{userId} Should not send activation link to unavailable email" time="0.0150" classname="Should not send activation link to unavailable email">
+    </testcase>
+  </testsuite>
+</testsuites>
