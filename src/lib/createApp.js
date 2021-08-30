@@ -3,6 +3,13 @@ const bp = require('body-parser');
 const AuthRoutes = require('../routes/authRoutes');
 const createError = require('http-errors');
 const cors = require('cors')
+const YAML = require('yamljs')
+
+
+//Swagger documentation setup
+const helmet = require('helmet');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = YAML.load('docs/swagger.yaml');
 
 /**
  * 
@@ -12,6 +19,10 @@ const createApp = async () => {
     const app = express();
     app.use(bp.json());
     app.use(cors())
+    app.use(cors());
+    app.use(helmet());
+
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     /**
      * Cors policy configurations 

@@ -1,0 +1,411 @@
+openapi: 3.0.0
+info:
+  title: NCCG API developed by Lawrence Katuva for Final Year Project
+  summary: API endpoints for NCCG API
+  description: Please select the serve below depending on whether you are using Heroku or running the application locally
+
+version: 0.1.9
+
+servers:
+  - url: http://localhost:3000/api
+
+components:
+  securitySchemes:
+    USER-KEY:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        username:
+          type: string
+          example: Lawrence
+        email:
+          type: string
+          example: example@gmail.com
+        password:
+          type: string
+          example: qazwsxedc
+        country:
+          type: string
+          example: Kenya
+        county:
+          type: string
+          example: Kitui
+        phone:
+          type: number
+          example: 0789890098
+        is_active:
+          type: boolean
+          example: true
+        is_verified:
+          type: boolean
+          example: false
+        dateOfBirth:
+          type: string
+          example: 12-12-2021
+        imageurl:
+          type: string
+          example: http//profile....
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Registering new user endpoint
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#components/schemas/User"
+      responses:
+        200:
+          description: Creating a new user account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: User added successfully
+                  newUser:
+                    $ref: "#components/schemas/User"
+        400:
+          description: If user email already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: string
+                    example: email
+                  code:
+                    type: string
+                    example: AUR_09
+                  message:
+                    type: string
+                    example: Email already exists
+        401:
+          description: If empty fields are submitted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: string
+                    example: email
+                  code:
+                    type: string
+                    example: AUR_08
+                  message:
+                    type: string
+                    example: All fields are required
+
+  /auth/login:
+    post:
+      summary: Login user
+      description: Login user endpoint
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: example@gmail.com
+                password:
+                  type: string
+                  example: qazwsxedc
+      responses:
+        200:
+          description: If login process is success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  newUser:
+                    $ref: "#components/schemas/User"
+                  message:
+                    type: string
+                    example: User logged in successfully
+                  accessToken:
+                    type: string
+                    example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjo3OCwiaWF0IjoxNjMwMzUxODI2fQ.YNWh0QN2ZyyS4ziuruQCn7Dxae3DlEvSN1k4BWemK7w
+                  expiry:
+                    type: string
+                    example: 1h
+        400:
+          description: If email is not registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: string
+                    example: email
+                  code:
+                    type: string
+                    example: AUR_10
+                  message:
+                    type: string
+                    example: Email does not exists
+        401:
+          description: If password is not valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Invalid login details
+  /auth/update-user-passowrd:
+    patch:
+      summary: Reset user password
+      description: reset password endpoint
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: example@gmail.com
+                password:
+                  type: string
+                  example: qazwsxedc
+      responses:
+        200:
+          description: If login process is success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Password reset successfully
+        400:
+          description: If email is not registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: string
+                    example: email
+                  code:
+                    type: string
+                    example: AUR_10
+                  message:
+                    type: string
+                    example: Email does not exists
+  /auth/activate/{userId}:
+    patch:
+      summary: Activate user account
+      description: Activate user account endpoint
+      tags:
+        - Authentication
+      parameters:
+        - in: header
+          name: userId
+          description: Id should belong to user account to update
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: If login process is success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: User account activated successfully
+        400:
+          description: If userId does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: number
+                    example: userId
+                  code:
+                    type: string
+                    example: AUR_10
+                  message:
+                    type: string
+                    example: UserId does not exists
+  /auth/deactivate/{userId}:
+    patch:
+      summary: Activate user account
+      description: Activate user account endpoint
+      tags:
+        - Authentication
+      parameters:
+        - in: header
+          name: userId
+          description: Id should belong to user account to update
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: If login process is success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: User account deactivated successfully
+        400:
+          description: If userId does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: number
+                    example: userId
+                  code:
+                    type: string
+                    example: AUR_10
+                  message:
+                    type: string
+                    example: UserId does not exists
+  /auth/request-reset-password-link:
+    post:
+      summary: Request for password reset link
+      description: request password reset link endpoint
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: example@gmail.com
+      responses:
+        200:
+          description: If login process is success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Reset password link send, check email
+        400:
+          description: If email is not registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  status:
+                    type: number
+                    example: 400
+                  field:
+                    type: string
+                    example: email
+                  code:
+                    type: string
+                    example: AUR_10
+                  message:
+                    type: string
+                    example: Email does not exists
