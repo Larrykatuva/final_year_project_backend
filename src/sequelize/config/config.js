@@ -5,7 +5,7 @@ module.exports = {
     "username":'root',//process.env.DATABASE_USER,
     "password":'Larry@98?!KU',//process.env.DATABASE_PASSWORD,
     "database":'final_year',//process.env.DATABASE_NAME,
-    "host":'10.0.2.2',//process.env.DATABASE_HOST,
+    "host":'192.168.0.14',//process.env.DATABASE_HOST,
     "dialect": "mysql"
   },
   "test": {
