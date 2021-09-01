@@ -6,12 +6,7 @@ module.exports = {
     "password":'Larry@98?!KU',//process.env.DATABASE_PASSWORD,
     "database":'final_year',//process.env.DATABASE_NAME,
     "host":'10.0.2.2',//process.env.DATABASE_HOST,
-    "dialect": "mysql",
-    "dialectOptions": {
-      "options": {
-        "requestTimeout": 60000
-      }
-    },
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
