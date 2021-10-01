@@ -14,7 +14,7 @@ const Errors = {
     AUR_13: 'Email is required'
 };
 
-handleAuthErrors = (code, status, field) => {
+export const handleAuthErrors = (code, status, field) => {
     return {
       error: true,
       status,
@@ -24,4 +24,3 @@ handleAuthErrors = (code, status, field) => {
     };
   };
   
-module.exports = handleAuthErrors;

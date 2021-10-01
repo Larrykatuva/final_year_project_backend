@@ -1,11 +1,11 @@
-const createApp = require('./src/lib/createApp');
-const dotenv = require('dotenv').config();
-const createError = require('http-errors');
-const cluster = require('cluster');
+import {createApp} from './src/lib/createApp';
+require('dotenv').config();
+import createError from 'http-errors';
+import cluster from 'cluster';
 
 
 const PORT = process.env.PORT || 5000;
-const main =async () => {
+const main = async () => {
     try {
         if (cluster.isMaster) {
             var cpuCount = require('os').cpus().length;
@@ -35,4 +35,4 @@ const main =async () => {
     }
 }
 
-module.exports = main();
+export default main();

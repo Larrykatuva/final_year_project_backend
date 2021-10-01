@@ -1,8 +1,6 @@
-const models = require('../src/sequelize/models/index')
+import models from '../src/sequelize/models/index';
 
-const truncate = async () => {
+export const truncate = async () => {
     await models.sequelize.sync ();
     return;
 }
-
-module.exports = truncate

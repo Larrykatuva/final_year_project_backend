@@ -1,6 +1,6 @@
-const createError = require('http-errors');
-const handleAuthErrors = require('../errors/auth')
-const { 
+import createError from 'http-errors';
+import  {handleAuthErrors} from '../errors/auth';
+import { 
     checkIfUserEmailExists,
     registerUser,
     loginUser,
@@ -8,12 +8,13 @@ const {
     activateUserEmail,
     deactivateUserAccount,
     updateUserPassword
-} = require('../helpers/user')
-const {
+} from '../helpers/user';
+import {
     sendActivationMail,
     sendResetPasswordEmail
-} = require('../services/email')
-class UserController{
+} from '../services/email';
+
+export class UserController{
     /**
    * Sign up a new user
    * @param {Object} req The request object
@@ -318,5 +319,3 @@ class UserController{
     }
 
 }
-
-module.exports = UserController;

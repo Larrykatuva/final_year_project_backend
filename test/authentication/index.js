@@ -1,8 +1,8 @@
-const chai = require('chai')
-const createApp = require('../../src/lib/createApp')
-const db = require('../../src/sequelize/models/index')
-const request = require('supertest')
-const truncate = require('../truncate')
+import chai from 'chai'
+import {createApp} from '../../src/lib/createApp'
+import db from '../../src/sequelize/models/index'
+import request from 'supertest'
+import {truncate} from '../truncate'
 
 const {expect} = chai
 
@@ -18,7 +18,7 @@ describe('Authentication tests', () => {
         await truncate();
         await db.User.destroy({where: {}});
 
-         const app  = await createApp();
+        const app  = await createApp();
         server = app.listen(5000);
     });
 
