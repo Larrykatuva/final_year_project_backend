@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const handleAuthErrors = require('../errors/auth');
-const dotenv = require('dotenv').config();
+import jwt from 'jsonwebtoken';
+import {handleAuthErrors} from '../errors/auth';
+require('dotenv').config();
 
-const authentication = async (req, res, next) => {
+export const authentication = async (req, res, next) => {
     const secretKey = await process.env.PRIVATE_KEY;
     const bearerHeader = await req.headers['authorization'];
 
@@ -41,5 +41,3 @@ const authentication = async (req, res, next) => {
                 .send(handleAuthErrors('AUR_04', 401, 'NoAuth'));
     }
 }
-
-module.exports = authentication;

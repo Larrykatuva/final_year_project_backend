@@ -1,5 +1,5 @@
-const nodemailer = require("nodemailer");
-const dotenv = require('dotenv').config();
+import  nodemailer from "nodemailer";
+require('dotenv').config();
 
 
 /**
@@ -7,7 +7,7 @@ const dotenv = require('dotenv').config();
  * @param {string} email
  * @returns {boolean} true or false
  */
-const sendActivationMail = async(receipientEmail, ur) => {
+export const sendActivationMail = async(receipientEmail, ur) => {
     try {
         const transporter = nodemailer.createTransport({
             service: process.env.EMAIL_SERVICE,
@@ -37,7 +37,7 @@ const sendActivationMail = async(receipientEmail, ur) => {
  * @param {string} email
  * @returns {boolean} true or false
  */
-const sendResetPasswordEmail = async(receipientEmail, ur) => {
+export const sendResetPasswordEmail = async(receipientEmail, ur) => {
     try {
         const transporter = nodemailer.createTransport({
             service: process.env.EMAIL_SERVICE,
@@ -59,9 +59,4 @@ const sendResetPasswordEmail = async(receipientEmail, ur) => {
     } catch (error) {
         return false
     }
-}
-
-module.exports = {
-    sendActivationMail,
-    sendResetPasswordEmail
 }
