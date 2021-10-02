@@ -39,7 +39,7 @@ const collectionVar = collection.replace(
   '{{baseUrl}}'
 );
 
-const fileName = 'andela-meals-postman-collection.json';
+const fileName = 'NCCG-postman-collection.json';
 
 const writePath = `${os.homedir()}/Downloads/${fileName}`;
 
