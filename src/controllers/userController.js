@@ -15,12 +15,14 @@ import {
 } from '../services/email';
 
 export class UserController{
+   
     /**
-   * Sign up a new user
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @returns {Object} Data for new user
-   */
+     * Singup a new user
+     * @param {Request} req 
+     * @param {Response} res 
+     * @param {Next} next 
+     * @returns {object} res a json of a error and message
+     */
    static async registerNewUser(req,res,next){
        const {
            body: {username, email, password, country, county, dateOfBirth, phone, imageUrl}
@@ -78,16 +80,17 @@ export class UserController{
 
 
     /**
-   * Login user with email and password
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @returns {Object} Data for new user
-   */
+     * Login user
+     * @param {Request} req 
+     * @param {Response} res 
+     * @param {Next} next 
+     * @returns {object} res a json of a error,message, user, expiry and accessToken
+     */
     static async signInUser(req, res, next){
         const {
             body: {email, password}
         } = req
-        if(!email, !password){
+        if(!email || !password){
             return res
                 .status(400)
                 .send(handleAuthErrors('AUR_08', 400, 'fields'))
@@ -139,11 +142,12 @@ export class UserController{
 
 
     /**
-   * Activate newly registered user by thier id
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @returns {Object} Data for new user
-   */
+     * Activate newly created user by id
+     * @param {Request} req 
+     * @param {Response} res 
+     * @param {Next} next 
+     * @returns {object} res a json of a error and message
+     */
     static async emailAvtivateUser(req, res, next){
         const{ params: {userId}} = req
         if(!userId){
@@ -181,11 +185,12 @@ export class UserController{
 
 
     /**
-   * Deactivate already active user by thier id
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @returns {Object} Data for new user
-   */
+     * Deactivate user account by ID
+     * @param {Request} req 
+     * @param {Response} res 
+     * @param {Next} next 
+     * @returns {object} res a json of a error and message
+     */
     static async userAccountDeactivation(req, res, next){
         const{ params: {userId}} = req
         if(!userId){
@@ -221,12 +226,13 @@ export class UserController{
     }
 
 
-     /**
-   * Send password reset email
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @returns {Object} message
-   */
+    /**
+     * Send a password reset link via email
+     * @param {Request} req 
+     * @param {Response} res 
+     * @param {Next} next 
+     * @returns {object} res a json of a error and message
+     */
     static async requestResetPasswordLink(req, res, next){
         const {body: {email}} = req
         const host = 'https/nccg'//req.headers.origin
@@ -271,11 +277,12 @@ export class UserController{
 
 
     /**
-   * Update user password
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @returns {Object} message of updated user details
-   */
+     * Set New user password
+     * @param {Request} req 
+     * @param {Response} res 
+     * @param {Next} next 
+     * @returns {object} res a json of a error and message
+     */
     static async setNewPassword(req, res, next){
         const {
             body: {email, password}

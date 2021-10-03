@@ -9,7 +9,7 @@ const main = async () => {
     try {
         if (cluster.isMaster) {
             var cpuCount = require('os').cpus().length;
-            for (var i = 0; i < cpuCount; i += 1) {
+            for (let i = 0; i < cpuCount; i += 1) {
                 cluster.fork();
             }
             // Listen for terminating workers,restart them if they terminate
